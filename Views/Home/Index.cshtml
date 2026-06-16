@@ -1,0 +1,526 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --crimson: #E63946;
+        --crimson-dark: #B52D38;
+        --midnight: #1D3557;
+        --midnight2: #162844;
+        --midnight3: #0F1E33;
+        --white: #F1FAEE;
+        --yellow: #FFD166;
+        --yellow-dim: #C9A23E;
+        --muted: #7A8FA8;
+        --border-dark: #253550;
+    }
+
+
+
+    .mundialista-page {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem 4rem;
+        color: #0b2233;
+        font-family: 'Inter', sans-serif;
+    }
+
+
+    .m-eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--yellow);
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .m-eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 1px;
+            background: var(--yellow);
+            flex-shrink: 0;
+        }
+
+
+    .m-hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.4rem, 6vw, 3.8rem);
+        font-weight: 900;
+        line-height: 1.05;
+        color: #0b2233;
+        margin-bottom: 1.2rem;
+    }
+
+        .m-hero-title em {
+            font-style: italic;
+            color: var(--crimson);
+        }
+
+    .m-hero-sub {
+        font-size: 1rem;
+        color: #4f6578;
+        line-height: 1.7;
+        max-width: 520px;
+        margin-bottom: 2rem;
+        font-weight: 300;
+    }
+
+
+    .m-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--crimson);
+        color: #fff !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.7rem 1.6rem;
+        border: none;
+        text-decoration: none !important;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+        .m-btn-primary:hover {
+            background: var(--crimson-dark);
+            color: #fff !important;
+        }
+
+    .m-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: #0b2233 !important;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.7rem 1.6rem;
+        border: 1px solid rgba(13,24,35,0.06);
+        text-decoration: none !important;
+        transition: border-color 0.2s;
+        cursor: pointer;
+    }
+
+        .m-btn-ghost:hover {
+            border-color: var(--crimson);
+            color: var(--white) !important;
+        }
+
+
+    .m-divider {
+        height: 1px;
+        background: var(--border-dark);
+        margin: 2.5rem 0;
+        border: none;
+    }
+
+    .m-divider-accent {
+        height: 1px;
+        background: linear-gradient(90deg, var(--crimson) 0%, transparent 65%);
+        margin: 2.5rem 0;
+        border: none;
+    }
+
+
+    .m-section-label {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+    }
+
+
+    .m-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border-dark);
+    }
+
+    .m-stat-card {
+        background: #ffffff;
+        padding: 2rem 1.5rem 1.8rem;
+        border-left: 3px solid transparent;
+        transition: background 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 6px 18px rgba(13,24,35,0.04);
+    }
+
+        .m-stat-card:hover {
+            background: #fbfdff;
+            box-shadow: 0 10px 28px rgba(13,24,35,0.06);
+        }
+
+    .m-stat-card--red {
+        border-left-color: var(--crimson);
+    }
+
+    .m-stat-card--yellow {
+        border-left-color: var(--yellow);
+    }
+
+    .m-stat-card--white {
+        border-left-color: var(--white);
+    }
+
+    .m-stat-num {
+        display: block;
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(2.6rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 1;
+        color: #0b2233;
+        margin-bottom: 0.5rem;
+    }
+
+    .m-stat-card--red .m-stat-num {
+        color: var(--crimson);
+    }
+
+    .m-stat-card--yellow .m-stat-num {
+        color: var(--yellow);
+    }
+
+    .m-stat-tag {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #6c757d;
+    }
+
+    .m-stat-card--red .m-stat-tag {
+        color: var(--crimson-dark);
+    }
+
+    .m-stat-card--yellow .m-stat-tag {
+        color: var(--yellow-dim);
+    }
+
+    .m-stat-card--white .m-stat-tag {
+        color: var(--muted);
+    }
+
+
+    .m-carousel-wrap {
+        background: #ffffff;
+        border: 1px solid rgba(37,53,80,0.06);
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(13,24,35,0.04);
+    }
+
+    .m-carousel-slide {
+        display: none;
+        padding: 2.5rem 2rem 2rem;
+        color: #0b2233;
+    }
+
+        .m-carousel-slide.active {
+            display: block;
+        }
+
+    .m-slide-category {
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--crimson);
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+    }
+
+    .m-slide-title {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: #0b2233;
+        margin-bottom: 0.5rem;
+    }
+
+    .m-slide-desc {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 300;
+        line-height: 1.6;
+    }
+
+    .m-carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem 1.5rem;
+        border-top: 1px solid var(--border-dark);
+    }
+
+    .m-dots {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .m-dot {
+        width: 20px;
+        height: 2px;
+        background: var(--border-dark);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.2s, width 0.2s;
+    }
+
+        .m-dot.active {
+            background: var(--crimson);
+            width: 32px;
+        }
+
+    .m-carousel-nav {
+        display: flex;
+        gap: 4px;
+    }
+
+    .m-carousel-btn {
+        width: 36px;
+        height: 36px;
+        background: var(--midnight2);
+        border: 1px solid var(--border-dark);
+        color: var(--white);
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, color 0.2s;
+        line-height: 1;
+    }
+
+        .m-carousel-btn:hover {
+            border-color: var(--crimson);
+            color: var(--crimson);
+        }
+
+
+    .m-footer-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-dark);
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .m-brand-text {
+        font-family: 'Playfair Display', serif;
+        font-size: 0.9rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+    }
+
+        .m-brand-text span {
+            color: var(--crimson);
+        }
+
+    .m-season {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    @@media (max-width: 600px) {
+        .m-stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .m-stat-card {
+            padding: 1.4rem 1.2rem;
+        }
+    }
+</style>
+
+<div class="mundialista-page">
+
+
+    <p class="m-eyebrow">Colección Oficial</p>
+
+    <h1 class="m-hero-title">
+        La Colección<br><em>Mundialista</em>
+    </h1>
+
+    <p class="m-hero-sub">
+        Gestiona jugadores, selecciones y cromos de élite.
+        Una plataforma construida para coleccionistas exigentes.
+    </p>
+
+    <div class="d-flex flex-wrap gap-3">
+        <a asp-controller="Jugador" asp-action="Index" class="m-btn-primary">
+            <i class="bi bi-people-fill" aria-hidden="true"></i>
+            Ir a Jugadores
+        </a>
+        <a asp-controller="Cromo" asp-action="Index" class="m-btn-ghost">
+            <i class="bi bi-collection-fill" aria-hidden="true"></i>
+            Ver Cromos
+        </a>
+    </div>
+
+    <hr class="m-divider-accent" />
+
+
+    <p class="m-section-label">Resumen de colección</p>
+
+    <div class="m-stats-grid">
+
+        <div class="m-stat-card m-stat-card--red">
+            <span class="m-stat-num"
+                  data-counter
+                  data-target="@(ViewData["TotalJugadores"] ?? 0)">0</span>
+            <div class="m-stat-tag">Jugadores</div>
+        </div>
+
+        <div class="m-stat-card m-stat-card--yellow">
+            <span class="m-stat-num"
+                  data-counter
+                  data-target="@(ViewData["TotalSelecciones"] ?? 0)">0</span>
+            <div class="m-stat-tag">Selecciones</div>
+        </div>
+
+        <div class="m-stat-card m-stat-card--white">
+            <span class="m-stat-num"
+                  data-counter
+                  data-target="@(ViewData["TotalCromos"] ?? 0)">0</span>
+            <div class="m-stat-tag">Cromos</div>
+        </div>
+
+    </div>
+
+    <hr class="m-divider" />
+
+
+    <p class="m-section-label">Cromos destacados</p>
+
+    <div class="m-carousel-wrap">
+
+        <div id="mCarouselTrack">
+            <div class="m-carousel-slide active">
+                <p class="m-slide-category">Edición Especial</p>
+                <h2 class="m-slide-title">Leyendas del Fútbol</h2>
+                <p class="m-slide-desc">
+                    Los cromos históricos más valorados de toda la colección.
+                    Iconos que marcaron una era.
+                </p>
+            </div>
+            <div class="m-carousel-slide">
+                <p class="m-slide-category">Temporada Actual</p>
+                <h2 class="m-slide-title">Nuevas Selecciones</h2>
+                <p class="m-slide-desc">
+                    Plantillas actualizadas listas para el próximo torneo internacional.
+                </p>
+            </div>
+            <div class="m-carousel-slide">
+                <p class="m-slide-category">Más Buscados</p>
+                <h2 class="m-slide-title">Cromos Raros</h2>
+                <p class="m-slide-desc">
+                    Ediciones limitadas con tirada de menos de 500 unidades en todo el mundo.
+                </p>
+            </div>
+        </div>
+
+        <div class="m-carousel-controls">
+            <div class="m-dots" id="mDots">
+                <button class="m-dot active" aria-label="Diapositiva 1"></button>
+                <button class="m-dot" aria-label="Diapositiva 2"></button>
+                <button class="m-dot" aria-label="Diapositiva 3"></button>
+            </div>
+            <div class="m-carousel-nav">
+                <button class="m-carousel-btn" id="mPrev" aria-label="Anterior">&#8592;</button>
+                <button class="m-carousel-btn" id="mNext" aria-label="Siguiente">&#8594;</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="m-footer-strip mt-4">
+        <span class="m-brand-text">Colección <span>Mundialista</span></span>
+        <span class="m-season">Temporada 2026</span>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+
+
+            const counters = document.querySelectorAll('[data-counter]');
+            const DURATION = 1400;
+            const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+            function animateCounter(el) {
+                const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+                if (target === 0) { el.textContent = '0'; return; }
+                const start = performance.now();
+                function frame(now) {
+                    const p = Math.min((now - start) / DURATION, 1);
+                    el.textContent = Math.round(easeOut(p) * target);
+                    if (p < 1) requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
+            }
+
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver(entries => {
+                    entries.forEach(e => {
+                        if (e.isIntersecting) {
+                            animateCounter(e.target);
+                            io.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                counters.forEach(c => io.observe(c));
+            } else {
+                counters.forEach(animateCounter);
+            }
+
+
+            let current = 0;
+            const slides = document.querySelectorAll('.m-carousel-slide');
+            const dots   = document.querySelectorAll('.m-dot');
+
+            function goTo(i) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = ((i % slides.length) + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
+
+            document.getElementById('mNext').addEventListener('click', () => goTo(current + 1));
+            document.getElementById('mPrev').addEventListener('click', () => goTo(current - 1));
+            dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+            let autoplay = setInterval(() => goTo(current + 1), 4000);
+            document.getElementById('mCarouselTrack').addEventListener('mouseenter', () => clearInterval(autoplay));
+            document.getElementById('mCarouselTrack').addEventListener('mouseleave', () => {
+                autoplay = setInterval(() => goTo(current + 1), 4000);
+            });
+
+        })();
+    </script>
+}

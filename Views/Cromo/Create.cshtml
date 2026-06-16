@@ -1,0 +1,76 @@
+@model cromosmundial_proyecto_final.Models.Cromo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Cromo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="NumeroCamiseta" class="control-label"></label>
+                <input asp-for="NumeroCamiseta" class="form-control" />
+                <span asp-validation-for="NumeroCamiseta" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Posicion" class="control-label"></label>
+                <input asp-for="Posicion" class="form-control" />
+                <span asp-validation-for="Posicion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="ArchivoFoto" class="control-label"></label>
+                <input asp-for="ArchivoFoto" type="file" class="form-control" />
+                <span asp-validation-for="ArchivoFoto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <select asp-for="JugadorId"
+                        class="form-control"
+                        asp-items="@(ViewData["JugadorId"] as SelectList)">
+                    <option value="">Seleccione un jugador</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <select asp-for="SeleccionId"
+                        class="form-control"
+                        asp-items="@(ViewData["SeleccionesId"] as SelectList)">
+                    <option value="">Seleccione una selección</option>
+                </select>
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <select asp-for="MundialId"
+                        class="form-control"
+                        asp-items="@(ViewData["MundialesId"] as SelectList)">
+                    <option value="">Seleccione un mundial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,31 @@
+﻿@model cromosmundial_proyecto_final.Models.Seleccion
+
+@{
+    ViewData["Title"] = "Jugadores";
+}
+
+<h2>Jugadores de @Model.Nombre</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Jugador</th>
+            <th>Posición</th>
+            <th>Número</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cromo in Model.Cromos)
+        {
+            <tr>
+                <td>@cromo.Jugador?.Nombre</td>
+                <td>@cromo.Posicion</td>
+                <td>@cromo.NumeroCamiseta</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">
+    Volver
+</a>

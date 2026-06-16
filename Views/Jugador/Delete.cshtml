@@ -1,0 +1,37 @@
+@model cromosmundial_proyecto_final.Models.Jugador
+
+@{
+    ViewData["Title"] = "Eliminar Jugador";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm rounded-3 p-3">
+                <div class="mb-3">
+                    <h3 class="mb-0">Confirmar eliminación</h3>
+                    <p class="text-muted small mb-0">¿Seguro que deseas eliminar este jugador? Esta acción no se puede deshacer.</p>
+                </div>
+
+                <dl class="row mb-3">
+                    <dt class="col-sm-4 text-muted">Nombre</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Nombre)</dd>
+
+                    <dt class="col-sm-4 text-muted">Fecha de Nacimiento</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.FechaNacimiento)</dd>
+
+                    <dt class="col-sm-4 text-muted">Nacionalidad</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Nacionalidad)</dd>
+                </dl>
+
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

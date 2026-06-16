@@ -1,0 +1,60 @@
+@model IEnumerable<cromosmundial_proyecto_final.Models.Mundial>
+
+@{
+    ViewData["Title"] = "Mundiales";
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold mb-0">Mundiales</h1>
+            <small class="text-muted">Gestiona los torneos registrados</small>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-primary">Agregar Mundial</a>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get" class="row g-2 mb-3">
+        <div class="col-9 col-sm-10">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Buscar por nombre o año..." />
+        </div>
+        <div class="col-3 col-sm-2">
+            <button type="submit" class="btn btn-outline-primary w-100">Buscar</button>
+        </div>
+    </form>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning">@ViewBag.Mensaje</div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                    <th>@Html.DisplayNameFor(model => model.Anio)</th>
+                    <th>@Html.DisplayNameFor(model => model.PaisSede)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.Nombre)</td>
+                    <td>@Html.DisplayFor(model => item.Anio)</td>
+                    <td>@Html.DisplayFor(model => item.PaisSede)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Ver</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

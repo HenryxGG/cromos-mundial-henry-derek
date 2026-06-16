@@ -1,0 +1,28 @@
+@model cromosmundial_proyecto_final.Models.Mundial
+
+@{
+    ViewData["Title"] = "Detalle Mundial";
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm rounded-3 p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h2 class="fw-bold mb-0">@Html.DisplayFor(m => m.Nombre)</h2>
+                <small class="text-muted">Detalle del torneo</small>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Editar</a>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Volver</a>
+            </div>
+        </div>
+
+        <dl class="row">
+            <dt class="col-sm-3 text-muted">Año</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Anio)</dd>
+
+            <dt class="col-sm-3 text-muted">País sede</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.PaisSede)</dd>
+        </dl>
+    </div>
+</div>

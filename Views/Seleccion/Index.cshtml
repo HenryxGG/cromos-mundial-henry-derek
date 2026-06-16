@@ -1,0 +1,83 @@
+@model IEnumerable<cromosmundial_proyecto_final.Models.Seleccion>
+
+@{
+    ViewData["Title"] = "Selecciones";
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold mb-0">Selecciones</h1>
+            <small class="text-muted">Equipos nacionales registrados</small>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-primary">Agregar Selección</a>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get" class="row g-2 mb-3">
+        <div class="col-9 col-sm-10">
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Buscar por país o confederación..." />
+        </div>
+        <div class="col-3 col-sm-2">
+            <button type="submit" class="btn btn-outline-primary w-100">Buscar</button>
+        </div>
+    </form>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning">@ViewBag.Mensaje</div>
+    }
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle table-modern">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Confederación</th>
+                    <th>Director Técnico</th>
+                    <th>Foto</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td><a asp-action="Jugadores" asp-route-id="@item.Id" class="text-decoration-none text-primary-strong">@item.Nombre</a></td>
+                    <td>@Html.DisplayFor(model => item.Confederacion)</td>
+                    <td>@Html.DisplayFor(model => item.DirectorTecnico)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.RutaFoto))
+                        {
+                            <img src="@item.RutaFoto" alt="Foto de la Selección" class="img-fluid rounded" style="max-width:100px; background: rgba(255,255,255,0.02); padding:6px;" />
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Ver</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Paginación de Selecciones">
+        <ul class="pagination">
+            @{
+                int currentPage = ViewData["CurrentPage"] as int? ?? 1;
+                int totalPages = ViewData["TotalPages"] as int? ?? 1;
+                string currentFilter = ViewData["CurrentFilter"] as string ?? "";
+            }
+            @for (int i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == currentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-searchString="@currentFilter">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

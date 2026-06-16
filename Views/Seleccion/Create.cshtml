@@ -1,0 +1,51 @@
+@model cromosmundial_proyecto_final.Models.Seleccion
+
+@{
+    ViewData["Title"] = "Crear Selección";
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm rounded-3 p-4">
+        <h2 class="fw-bold">Nueva Selección</h2>
+        <p class="text-muted small">Registra un nuevo equipo nacional</p>
+        <hr />
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <div class="invalid-feedback d-block"><span asp-validation-for="Nombre"></span></div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                    <label asp-for="Confederacion" class="form-label">Confederación</label>
+                    <input asp-for="Confederacion" class="form-control" />
+                    <div class="invalid-feedback d-block"><span asp-validation-for="Confederacion"></span></div>
+                </div>
+                <div class="col-6">
+                    <label asp-for="DirectorTecnico" class="form-label">Director Técnico</label>
+                    <input asp-for="DirectorTecnico" class="form-control" />
+                    <div class="invalid-feedback d-block"><span asp-validation-for="DirectorTecnico"></span></div>
+                </div>
+            </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+            <div class="mb-3 mt-3">
+                <label asp-for="Cromos" class="form-label">Cromos</label>
+                <input asp-for="Cromos" class="form-control" />
+                <div class="invalid-feedback d-block"><span asp-validation-for="Cromos"></span></div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

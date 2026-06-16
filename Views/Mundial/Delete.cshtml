@@ -1,0 +1,32 @@
+@model cromosmundial_proyecto_final.Models.Mundial
+
+@{
+    ViewData["Title"] = "Eliminar Mundial";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm rounded-3 p-4">
+                <h4 class="mb-2">Confirmar eliminación</h4>
+                <p class="text-muted small">¿Deseas eliminar el mundial <strong>@Html.DisplayFor(m => m.Nombre)</strong>?</p>
+
+                <dl class="row mb-3">
+                    <dt class="col-sm-4 text-muted">Año</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Anio)</dd>
+
+                    <dt class="col-sm-4 text-muted">País sede</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.PaisSede)</dd>
+                </dl>
+
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2">
+                        <input type="submit" value="Eliminar" class="btn btn-danger" />
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

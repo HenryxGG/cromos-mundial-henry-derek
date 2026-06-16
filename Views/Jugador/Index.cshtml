@@ -1,0 +1,106 @@
+@model IEnumerable<cromosmundial_proyecto_final.Models.Jugador>
+
+@{
+    ViewData["Title"] = "Panel de Jugadores";
+    int currentPage = ViewData["CurrentPage"] as int? ?? 1;
+    int totalPages = ViewData["TotalPages"] as int? ?? 1;
+    string currentFilter = ViewData["CurrentFilter"] as string ?? "";
+}
+
+<div class="container my-5">
+
+    <div class="row align-items-center mb-4">
+        <div class="col-12 col-md-7">
+            <h1 class="fw-bold text-dark display-5 mb-1">Plantilla de Jugadores</h1>
+            <p class="text-muted lead fs-6 mb-0">Administra los perfiles, procedencias e historias de cada futbolista.</p>
+        </div>
+        <div class="col-12 col-md-5 text-center text-md-end mt-3 mt-md-0">
+            <a asp-action="Create" class="btn btn-primary btn-lg fw-bold">
+                <i class="bi bi-plus-lg me-2"></i> Agregar Jugador
+            </a>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-3 p-3 mb-4">
+        <form asp-action="Index" method="get" class="row g-2 align-items-center">
+            <div class="col-12 col-sm-9">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Buscar por nombre, nacionalidad..." />
+                </div>
+            </div>
+            <div class="col-12 col-sm-3">
+                <button type="submit" class="btn btn-primary w-100 fw-semibold">Buscar</button>
+            </div>
+        </form>
+    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-warning border-0 shadow-sm rounded-3 p-3 mb-4 d-flex align-items-center">
+            <i class="bi bi-exclamation-circle-fill fs-4 me-3 text-warning"></i>
+            <span class="fw-medium">@ViewBag.Mensaje</span>
+        </div>
+    }
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
+                        <div class="p-3 bg-primary bg-gradient text-white d-flex align-items-center">
+                            <div class="rounded-circle bg-white text-primary d-flex align-items-center justify-content-center me-3" style="width:46px;height:46px;font-weight:700;">@(!string.IsNullOrEmpty(item.Nombre) ? item.Nombre.Substring(0, Math.Min(2, item.Nombre.Length)).ToUpper() : "JG")</div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-truncate">@item.Nombre</h5>
+                                <small class="text-white-50">@item.Nacionalidad</small>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h6 class="text-muted small text-uppercase mb-2">Trayectoria</h6>
+                            <p class="card-text small text-muted mb-3" style="max-height:110px;overflow:auto;">@(!string.IsNullOrWhiteSpace(item.Historia) ? item.Historia : "Sin datos biográficos cargados hasta el momento.")</p>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <small class="text-muted"><i class="bi bi-calendar-event me-1"></i>@item.FechaNacimiento.Year</small>
+                                <small class="text-muted">ID: #@item.Id</small>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-white border-0">
+                            <div class="d-grid gap-2">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Ver perfil</a>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary btn-sm flex-grow-1">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm flex-grow-1">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    @if (totalPages > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Paginación de Jugadores">
+                <ul class="pagination">
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == currentPage ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-searchString="@ViewData["CurrentFilter"]">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</div>
+
+<style>
+    .card-body p { line-height:1.5; }
+    .bg-primary { background: linear-gradient(135deg,#0f2027,#203a43); }
+</style>

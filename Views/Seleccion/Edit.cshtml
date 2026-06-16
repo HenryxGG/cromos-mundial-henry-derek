@@ -1,0 +1,60 @@
+@model cromosmundial_proyecto_final.Models.Seleccion
+
+@{
+    ViewData["Title"] = "Editar Selección";
+}
+
+<div class="container my-5">
+    <div class="card shadow-sm rounded-3 p-4">
+        <h2 class="fw-bold">Editar Selección</h2>
+        <p class="text-muted small">Actualiza la información del equipo</p>
+        <hr />
+
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+            <input type="hidden" asp-for="RutaFoto" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label">Nombre</label>
+                <input asp-for="Nombre" class="form-control" />
+                <div class="invalid-feedback d-block"><span asp-validation-for="Nombre"></span></div>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                    <label asp-for="Confederacion" class="form-label">Confederación</label>
+                    <input asp-for="Confederacion" class="form-control" />
+                    <div class="invalid-feedback d-block"><span asp-validation-for="Confederacion"></span></div>
+                </div>
+                <div class="col-6">
+                    <label asp-for="DirectorTecnico" class="form-label">Director Técnico</label>
+                    <input asp-for="DirectorTecnico" class="form-control" />
+                    <div class="invalid-feedback d-block"><span asp-validation-for="DirectorTecnico"></span></div>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.RutaFoto))
+            {
+                <div class="mb-3">
+                    <label class="form-label d-block">Foto actual</label>
+                    <img src="@Model.RutaFoto" alt="Foto de la Selección" class="img-thumbnail" style="max-width:150px;" />
+                </div>
+            }
+
+            <div class="mb-3">
+                <label asp-for="ArchivoFoto" class="form-label">Cambiar foto</label>
+                <input asp-for="ArchivoFoto" type="file" class="form-control" accept="image/*" />
+                <div class="invalid-feedback d-block"><span asp-validation-for="ArchivoFoto"></span></div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
